@@ -101,7 +101,7 @@ public class LinkedList {
   public void print() {
     Node currNode = head;
     while (currNode != null) {
-      System.out.println(currNode.getVal());
+      System.out.print(currNode.getVal() + " ");
       currNode = currNode.getNext();
     }
   }
