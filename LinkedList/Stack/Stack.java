@@ -22,4 +22,8 @@ public class Stack extends LinkedList{
   public int pop() {
     return super.pop(0);
   }
+
+  public int peek() {
+    return getElement(0).getVal();
+  }
 }
