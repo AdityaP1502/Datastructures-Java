@@ -28,6 +28,19 @@ public class LinkedList {
     return empty;
   }
 
+  public Node getElement(int idx) {
+    int pos = 0;
+    Node currNode = head;
+
+    while (pos < idx) {
+      pos++;
+      currNode = currNode.getNext();
+    }
+
+    // currNode is the node at index idx
+    return currNode;
+  }
+
   public void insert(int value, int idx) throws IndexOutOfBoundsException{
     if (idx > length - 1 || idx < -1) {
       throw new IndexOutOfBoundsException("Non valid insert position");
@@ -50,12 +63,7 @@ public class LinkedList {
       return;
     }
 
-    int pos = 0;
-    Node currNode = head;
-    while (pos < idx - 1) {
-      pos++;
-      currNode = head.getNext(); // Read node at idx = pos
-    }
+    Node currNode = getElement(idx - 1);
 
     // Exit currNode at pos = idx - 1
     // Insert new node in between idx - 1 and idx
@@ -77,14 +85,7 @@ public class LinkedList {
       return temp.getVal();
     }
 
-    int pos = 0;
-    Node currNode = head;
-
-    while (pos < idx - 1) {
-      pos++;
-      currNode = currNode.getNext();
-    }
-
+    Node currNode = getElement(idx - 1);
     temp = currNode.getNext(); 
 
     if (idx == length - 1) {
@@ -97,12 +98,13 @@ public class LinkedList {
     currNode.setNext(temp.getNext());
     return temp.getVal();
   }
-
+  
   public void print() {
     Node currNode = head;
     while (currNode != null) {
       System.out.print(currNode.getVal() + " ");
       currNode = currNode.getNext();
     }
+    System.out.println("");
   }
 }
