@@ -1,26 +1,26 @@
 package LinkedList;
 
-public class LinkedList {
+public class LinkedList<T> {
   private boolean empty;
-  private Node head;
-  private Node tail;
+  private Node<T> head;
+  private Node<T> tail;
   private int length = 0;
 
   public LinkedList() {
     empty = true;
   }
 
-  public LinkedList(int value) {
+  public LinkedList(T value) {
     empty = false;
 
-    Node newNode = new Node(value);
+    Node<T> newNode = new Node<T>(value);
     head = newNode;
     tail = newNode;
 
     length++;
   }
 
-  public LinkedList(int arr[]) {
+  public LinkedList(T arr[]) {
     empty = false;
   }
 
@@ -28,9 +28,9 @@ public class LinkedList {
     return empty;
   }
 
-  public Node getElement(int idx) {
+  public Node<T> getElement(int idx) {
     int pos = 0;
-    Node currNode = head;
+    Node<T> currNode = head;
 
     while (pos < idx) {
       pos++;
@@ -40,14 +40,21 @@ public class LinkedList {
     // currNode is the node at index idx
     return currNode;
   }
+  public void insert(T value, int idx) throws IndexOutOfBoundsException{
+    if (isEmpty()) {
+      if (idx != 0) {
+        throw new IndexOutOfBoundsException("Non valid insert position. Can only insert at idx = 0 for empty list");
+      }
+      head = new Node<T>(value);
+      return;
+    }
 
-  public void insert(int value, int idx) throws IndexOutOfBoundsException{
     if (idx > length - 1 || idx < -1) {
       throw new IndexOutOfBoundsException("Non valid insert position");
     }
 
     length++;
-    Node newNode = new Node(value);
+    Node<T> newNode = new Node<T>(value);
 
     // Insert as a new head
     if (idx == 0) {
@@ -63,7 +70,7 @@ public class LinkedList {
       return;
     }
 
-    Node currNode = getElement(idx - 1);
+    Node<T> currNode = getElement(idx - 1);
 
     // Exit currNode at pos = idx - 1
     // Insert new node in between idx - 1 and idx
@@ -71,13 +78,13 @@ public class LinkedList {
     currNode.setNext(newNode);
   }
 
-  public int pop(int idx) {
-    if (idx > length - 1 || idx < 0) {
+  public T pop(int idx) {
+    if (idx >= length - 1 || idx < 0) {
       throw new IndexOutOfBoundsException("Non valid insert position");
     }
 
     // Delete head 
-    Node temp;
+    Node<T> temp;
 
     if (idx == 0) {
       temp = head;
@@ -85,7 +92,7 @@ public class LinkedList {
       return temp.getVal();
     }
 
-    Node currNode = getElement(idx - 1);
+    Node<T> currNode = getElement(idx - 1);
     temp = currNode.getNext(); 
 
     if (idx == length - 1) {
@@ -100,7 +107,7 @@ public class LinkedList {
   }
   
   public void print() {
-    Node currNode = head;
+    Node<T> currNode = head;
     while (currNode != null) {
       System.out.print(currNode.getVal() + " ");
       currNode = currNode.getNext();
