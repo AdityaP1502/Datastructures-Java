@@ -2,28 +2,28 @@ package LinkedList.Stack;
 
 import LinkedList.LinkedList;
 
-public class Stack extends LinkedList{
+public class Stack<T> extends LinkedList<T>{
   public Stack() {
     super();
   }
 
-  public Stack(int value) {
+  public Stack(T value) {
     super(value);
   }
 
-  public Stack(int[] arr) {
-    for (int i : arr) insert(i);
+  public Stack(T[] arr) {
+    for (T i : arr) insert(i);
   }
 
-  public void insert(int value) {
+  public void insert(T value) {
     super.insert(value, 0);
   }
 
-  public int pop() {
+  public T pop() {
     return super.pop(0);
   }
 
-  public int peek() {
+  public T peek() {
     return getElement(0).getVal();
   }
 }
